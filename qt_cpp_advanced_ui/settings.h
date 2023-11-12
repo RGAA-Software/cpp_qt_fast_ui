@@ -14,6 +14,8 @@ public:
     static int kOperationBtnCloseNomralColor;
     static int kOperationBtnCloseEnterColor;
     static int kSideBarWidth;
+    static int kSideBarNormalColor;
+    static int kSideBarEnterColor;
 };
 
 #endif // SETTINGS_H

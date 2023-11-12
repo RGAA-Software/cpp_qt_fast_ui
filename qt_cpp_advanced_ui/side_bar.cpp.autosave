@@ -21,7 +21,8 @@ void SideBarItem::paintEvent(QPaintEvent *event) {
         painter.setBrush(QBrush(this->normal_color_));
     }
 
-    painter.drawRect(this->rect());
+    QRect target_rect = QRect(this->rect()
+    painter.drawRect();
 
 }
 
