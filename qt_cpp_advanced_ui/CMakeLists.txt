@@ -21,6 +21,10 @@ add_executable(qt_cpp_advanced_ui
   title_bar.h
   settings.cpp
   settings.h
+  side_bar.cpp
+  side_bar.h
+  content_page.cpp
+  content_page.h
 )
 
 target_link_libraries(qt_cpp_advanced_ui PRIVATE Qt5::Widgets)

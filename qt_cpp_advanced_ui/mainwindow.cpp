@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 
 #include "title_bar.h"
+#include "side_bar.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent) {
@@ -18,14 +19,25 @@ MainWindow::MainWindow(QWidget *parent)
     shadow->setBlurRadius(10);
     this->setGraphicsEffect(shadow);
 
+    title_bar_ = new TitleBar(this);
+    side_bar_ = new SideBar(this);
+
     auto root_layout = new QVBoxLayout();
     root_layout->setSpacing(0);
     root_layout->setMargin(0);
-    title_bar_ = new TitleBar(this);
     root_layout->addSpacing(5);
 
     root_layout->addWidget(title_bar_);
-    root_layout->addStretch();
+
+    // content
+    auto content_layout = new QHBoxLayout();
+    content_layout->setSpacing(0);
+    content_layout->setMargin(0);
+    content_layout->addSpacing(5);
+    content_layout->addWidget(side_bar_);
+    content_layout->addStretch();
+    root_layout->addLayout(content_layout);
+
     setLayout(root_layout);
 
     // title bar events
@@ -56,6 +68,9 @@ void MainWindow::paintEvent(QPaintEvent *ev) {
 void MainWindow::resizeEvent(QResizeEvent *event) {
     if (title_bar_) {
         title_bar_->setFixedWidth(event->size().width());
+    }
+    if (side_bar_) {
+
     }
 }
 

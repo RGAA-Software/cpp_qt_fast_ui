@@ -5,6 +5,7 @@
 #include <QPaintEvent>
 
 class TitleBar;
+class SideBar;
 
 class MainWindow : public QWidget
 {
@@ -22,6 +23,7 @@ protected:
 private:
 
     TitleBar* title_bar_ = nullptr;
+    SideBar* side_bar_ = nullptr;
 
 };
 #endif // MAINWINDOW_H

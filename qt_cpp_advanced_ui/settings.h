@@ -13,7 +13,7 @@ public:
     static int kOperationBtnMinEnterColor;
     static int kOperationBtnCloseNomralColor;
     static int kOperationBtnCloseEnterColor;
-
+    static int kSideBarWidth;
 };
 
 #endif // SETTINGS_H
