@@ -19,6 +19,8 @@ public:
     void mouseReleaseEvent(QMouseEvent *event) override;
 
     void SetOnClickCallback(SideBarItemClickCallback&& cbk);
+    void Select();
+    void Unselect();
 
 private:
     SideBarItemClickCallback click_cbk_;
@@ -30,8 +32,8 @@ private:
     bool pressed_ = false;
 
     int left_right_padding_ = 8;
-    int round_radius_ = 8;
 
+    bool selected_ = false;
 };
 
 //// ---------------------------------------- ////
@@ -44,7 +46,15 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
+    void Select(int idx);
+
 signals:
+
+private:
+
+    std::vector<SideBarItem*> side_bar_items_;
+
+    int current_selected_item_ = 0;
 
 };
 

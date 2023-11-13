@@ -15,7 +15,7 @@ void SideBarItem::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
     painter.setPen(Qt::NoPen);
-    if (enter_) {
+    if (enter_ || selected_) {
         painter.setBrush(QBrush(this->enter_color_));
     }
     else {
@@ -45,10 +45,23 @@ void SideBarItem::mousePressEvent(QMouseEvent *event) {
 void SideBarItem::mouseReleaseEvent(QMouseEvent *event) {
     pressed_ = false;
     repaint();
+    if (this->click_cbk_) {
+        this->click_cbk_();
+    }
 }
 
 void SideBarItem::SetOnClickCallback(SideBarItemClickCallback&& cbk) {
     this->click_cbk_ = std::move(cbk);
+}
+
+void SideBarItem::Select() {
+    selected_ = true;
+    repaint();
+}
+
+void SideBarItem::Unselect() {
+    selected_ = false;
+    repaint();
 }
 
 //// ---------------------------------- ////
@@ -81,21 +94,40 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
         auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
         item_layout->addWidget(item);
+        side_bar_items_.push_back(item);
+        item->SetOnClickCallback([=]() {
+            Select(0);
+        });
     }
     {
         auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
+        item_layout->addSpacing(5);
         item_layout->addWidget(item);
+        side_bar_items_.push_back(item);
+        item->SetOnClickCallback([=]() {
+            Select(1);
+        });
     }
     {
         auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
+        item_layout->addSpacing(5);
         item_layout->addWidget(item);
+        side_bar_items_.push_back(item);
+        item->SetOnClickCallback([=]() {
+            Select(2);
+        });
     }
     {
         auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
+        item_layout->addSpacing(5);
         item_layout->addWidget(item);
+        side_bar_items_.push_back(item);
+        item->SetOnClickCallback([=]() {
+            Select(3);
+        });
     }
     item_layout->addStretch();
 
@@ -103,6 +135,9 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
 
     root_layout->addStretch();
     setLayout(root_layout);
+
+    // logic here
+    Select(0);
 }
 
 void SideBar::paintEvent(QPaintEvent *event) {
@@ -111,4 +146,19 @@ void SideBar::paintEvent(QPaintEvent *event) {
     painter.setBrush(QBrush(0x009988));
     painter.drawRect(this->rect());
 #endif
+}
+
+void SideBar::Select(int idx) {
+    if (idx < 0 || idx >= side_bar_items_.size()) {
+        return;
+    }
+
+    for (int i = 0; i < side_bar_items_.size(); i++) {
+        if (i == idx) {
+            side_bar_items_[i]->Select();
+        }
+        else {
+            side_bar_items_[i]->Unselect();
+        }
+    }
 }
