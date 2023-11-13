@@ -30,6 +30,8 @@ add_executable(qt_cpp_advanced_ui
   avatar.h
   audio_item.cpp
   audio_item.h
+  play_controller.cpp
+  play_controller.h
 )
 
 target_link_libraries(qt_cpp_advanced_ui PRIVATE Qt5::Widgets)

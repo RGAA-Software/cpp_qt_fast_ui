@@ -8,6 +8,7 @@
 class TitleBar;
 class SideBar;
 class ContentPage;
+class PlayController;
 
 class MainWindow : public QWidget
 {
@@ -28,6 +29,7 @@ private:
     SideBar* side_bar_ = nullptr;
     ContentPage* content_page_ = nullptr;
     QScrollArea* content_area_ = nullptr;
+    PlayController* play_controller_ = nullptr;
 
 };
 #endif // MAINWINDOW_H

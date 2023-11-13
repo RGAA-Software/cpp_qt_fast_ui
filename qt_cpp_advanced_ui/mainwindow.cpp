@@ -11,6 +11,7 @@
 #include "audio_item.h"
 #include "settings.h"
 #include "layout_helper.h"
+#include "play_controller.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent) {
@@ -25,12 +26,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     title_bar_ = new TitleBar(this);
     side_bar_ = new SideBar(this);
+    play_controller_ = new PlayController();
 
     auto scroll_area_layout = new QVBoxLayout();
     LayoutHelper::ClearMarginSpacing(scroll_area_layout);
 
     content_area_ = new QScrollArea();
     scroll_area_layout->addWidget(content_area_);
+
+    play_controller_->setFixedHeight(90);
+    scroll_area_layout->addWidget(play_controller_);
     scroll_area_layout->addStretch();
 
     content_area_->setFixedHeight(400);
