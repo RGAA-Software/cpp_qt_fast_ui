@@ -56,7 +56,8 @@ MainWindow::~MainWindow() {
 
 void MainWindow::paintEvent(QPaintEvent *ev) {
     QPainter painter(this);
-    int radius = 7;
+    painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+    int radius = 10;
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(QColor(0xffffff)));
     int padding = 5;

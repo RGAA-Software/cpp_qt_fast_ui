@@ -1,6 +1,7 @@
 #include "side_bar.h"
 #include "settings.h"
 #include "layout_helper.h"
+#include "avatar.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -21,7 +22,8 @@ void SideBarItem::paintEvent(QPaintEvent *event) {
         painter.setBrush(QBrush(this->normal_color_));
     }
 
-    painter.drawRect(this->rect());
+    QRect inner_rect(left_right_padding_, 0, this->rect().width()-left_right_padding_*2, this->rect().height());
+    painter.drawRoundedRect(inner_rect, this->height()/2, this->height()/2);
 
 }
 
@@ -62,7 +64,19 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
     // item layout
     auto item_layout = new QVBoxLayout();
     LayoutHelper::ClearMarginSpacing(item_layout);
+    // avatar
+    {
+        auto avatar = new Avatar(Settings::kAvatarSize, this);
+        auto avatar_layout = new QHBoxLayout();
+        LayoutHelper::ClearMarginSpacing(avatar_layout);
+        avatar_layout->addStretch();
+        avatar_layout->addWidget(avatar);
+        avatar_layout->addStretch();
+        item_layout->addSpacing(30);
+        item_layout->addLayout(avatar_layout);
+    }
 
+    item_layout->addSpacing(30);
     {
         auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));

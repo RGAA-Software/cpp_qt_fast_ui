@@ -26,6 +26,8 @@ add_executable(qt_cpp_advanced_ui
   content_page.cpp
   content_page.h
   layout_helper.h
+  avatar.cpp
+  avatar.h
 )
 
 target_link_libraries(qt_cpp_advanced_ui PRIVATE Qt5::Widgets)

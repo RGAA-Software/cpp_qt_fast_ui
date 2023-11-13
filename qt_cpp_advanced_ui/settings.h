@@ -16,6 +16,7 @@ public:
     static int kSideBarWidth;
     static int kSideBarNormalColor;
     static int kSideBarEnterColor;
+    static int kAvatarSize;
 };
 
 #endif // SETTINGS_H

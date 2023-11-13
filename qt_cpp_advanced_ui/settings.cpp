@@ -9,6 +9,7 @@ int Settings::kOperationBtnCloseEnterColor = 0xff0000;
 int Settings::kSideBarWidth = 180;
 int Settings::kSideBarNormalColor = 0xffffff;
 int Settings::kSideBarEnterColor = 0x334466;
+int Settings::kAvatarSize = 75;
 
 Settings::Settings()
 {

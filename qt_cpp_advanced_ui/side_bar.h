@@ -29,6 +29,9 @@ private:
     bool enter_ = false;
     bool pressed_ = false;
 
+    int left_right_padding_ = 8;
+    int round_radius_ = 8;
+
 };
 
 //// ---------------------------------------- ////
