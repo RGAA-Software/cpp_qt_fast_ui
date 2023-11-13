@@ -116,8 +116,7 @@ void TitleBar::SetCloseClickCallback(ClickCallback&& cbk) {
 void TitleBar::mousePressEvent(QMouseEvent *event) {
     if (event->buttons() & Qt::LeftButton) {
         click_point_ = event->globalPos();
-        click_window_pos_ = mapToGlobal(pos());
-        //qDebug() << "click point : " << event->pos();
+        click_window_pos_ = ((QWidget*)this->parent())->pos();
         left_pressed_ = true;
     }
 }
@@ -125,8 +124,8 @@ void TitleBar::mousePressEvent(QMouseEvent *event) {
 void TitleBar::mouseMoveEvent(QMouseEvent *event) {
     if ((event->buttons() & Qt::LeftButton) && left_pressed_) {
         QPoint point_offset = event->globalPos() - click_point_;
-        ((QWidget*)this->parent())->move(click_window_pos_ + point_offset);
-        //qDebug() << "move point : " << event->pos();
+        auto target_pos = click_window_pos_ + point_offset;
+        ((QWidget*)this->parent())->move(target_pos);
     }
 }
 
