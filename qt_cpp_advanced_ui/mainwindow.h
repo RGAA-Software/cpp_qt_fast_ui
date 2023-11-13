@@ -6,6 +6,7 @@
 
 class TitleBar;
 class SideBar;
+class ContentPage;
 
 class MainWindow : public QWidget
 {
@@ -24,6 +25,7 @@ private:
 
     TitleBar* title_bar_ = nullptr;
     SideBar* side_bar_ = nullptr;
+    ContentPage* content_page_ = nullptr;
 
 };
 #endif // MAINWINDOW_H

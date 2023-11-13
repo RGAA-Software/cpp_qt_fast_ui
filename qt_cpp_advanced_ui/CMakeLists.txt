@@ -28,6 +28,8 @@ add_executable(qt_cpp_advanced_ui
   layout_helper.h
   avatar.cpp
   avatar.h
+  audio_item.cpp
+  audio_item.h
 )
 
 target_link_libraries(qt_cpp_advanced_ui PRIVATE Qt5::Widgets)

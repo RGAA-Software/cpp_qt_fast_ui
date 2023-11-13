@@ -7,6 +7,8 @@
 
 #include "title_bar.h"
 #include "side_bar.h"
+#include "content_page.h"
+#include "audio_item.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent) {
@@ -21,6 +23,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     title_bar_ = new TitleBar(this);
     side_bar_ = new SideBar(this);
+    content_page_ = new ContentPage(4, 120, 20, this);
+    // test
+    {
+        std::vector<std::shared_ptr<AudioItem>> items;
+        items.push_back(AudioItem::Make("",""));
+        items.push_back(AudioItem::Make("",""));
+        items.push_back(AudioItem::Make("",""));
+        items.push_back(AudioItem::Make("",""));
+        items.push_back(AudioItem::Make("",""));
+        content_page_->UpdateAudioItems(items);
+    }
 
     auto root_layout = new QVBoxLayout();
     root_layout->setSpacing(0);
@@ -35,7 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
     content_layout->setMargin(0);
     content_layout->addSpacing(5);
     content_layout->addWidget(side_bar_);
-    content_layout->addStretch();
+    content_layout->addWidget(content_page_);
+
     root_layout->addLayout(content_layout);
 
     setLayout(root_layout);
