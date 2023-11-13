@@ -6,9 +6,10 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-SideBarItem::SideBarItem(int nc, int ec, QWidget* parent) : QWidget(parent) {
+SideBarItem::SideBarItem(int nc, int ec, const QString& title, QWidget* parent) : QWidget(parent) {
     this->normal_color_ = nc;
     this->enter_color_ = ec;
+    this->title_ = title;
 }
 
 void SideBarItem::paintEvent(QPaintEvent *event) {
@@ -25,6 +26,17 @@ void SideBarItem::paintEvent(QPaintEvent *event) {
     QRect inner_rect(left_right_padding_, 0, this->rect().width()-left_right_padding_*2, this->rect().height());
     painter.drawRoundedRect(inner_rect, this->height()/2, this->height()/2);
 
+    QPen pen;
+    QFont font = QFont("Microsoft YaHei", 13, QFont::Bold, false);;
+    if (enter_ || selected_) {
+        pen.setColor(this->normal_color_);
+    }
+    else {
+        pen.setColor(this->enter_color_);
+    }
+    painter.setPen(pen);
+    painter.setFont(font);
+    painter.drawText(this->rect(), Qt::AlignCenter, title_);
 }
 
 void SideBarItem::enterEvent(QEvent *event) {
@@ -91,7 +103,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
 
     item_layout->addSpacing(30);
     {
-        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
+        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, "睡眠", this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
         item_layout->addWidget(item);
         side_bar_items_.push_back(item);
@@ -100,7 +112,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
         });
     }
     {
-        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
+        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, "专注",this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
         item_layout->addSpacing(5);
         item_layout->addWidget(item);
@@ -110,7 +122,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
         });
     }
     {
-        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
+        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, "放松", this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
         item_layout->addSpacing(5);
         item_layout->addWidget(item);
@@ -120,7 +132,7 @@ SideBar::SideBar(QWidget *parent) : QWidget(parent) {
         });
     }
     {
-        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, this);
+        auto item = new SideBarItem(Settings::kSideBarNormalColor, Settings::kSideBarEnterColor, "冥想", this);
         item->setFixedSize(QSize(Settings::kSideBarWidth, 35));
         item_layout->addSpacing(5);
         item_layout->addWidget(item);

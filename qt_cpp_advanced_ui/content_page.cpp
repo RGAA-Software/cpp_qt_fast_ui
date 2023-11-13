@@ -46,7 +46,7 @@ void ContentPage::paintEvent(QPaintEvent *event) {
     painter.setBrush(QBrush(0xeeeeee));
     painter.setPen(Qt::NoPen);
     QRect inner_rect(0, 0, this->rect().width()-padding_size_ , this->rect().height()-padding_size_);
-    painter.drawRect(inner_rect);
+    //painter.drawRect(inner_rect);
 
     // 1. horizontal gap
     int h_gap = (this->width() - this->item_size_*this->item_count_) / (this->item_count_+1);
@@ -77,6 +77,18 @@ void ContentPage::paintEvent(QPaintEvent *event) {
                           circle_diameter);
         painter.setBrush(QBrush(0xffffff));
         painter.drawEllipse(circle_rect);
+
+        painter.save();
+        QPainterPath path;
+        int circle_x_offset = item_rect.x() + left_padding;
+        int circle_y_offset = item_rect.y() + 7;
+        QRect circle_path_rect(circle_x_offset, circle_y_offset, circle_diameter, circle_diameter);
+//        mask_rect.setX();
+//        mask_rect.setY(item_rect.y() + 7);
+        path.addRoundedRect(circle_path_rect, circle_diameter/2, circle_diameter/2);
+        painter.setClipPath(path);
+        painter.drawPixmap(item_rect.x() + left_padding, item_rect.y() + 7, item->pixmap_);
+        painter.restore();
 
         QPen pen;
         QFont font("Microsoft YaHei", 13, QFont::Normal, false);

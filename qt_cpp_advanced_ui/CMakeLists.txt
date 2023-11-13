@@ -32,6 +32,8 @@ add_executable(qt_cpp_advanced_ui
   audio_item.h
   play_controller.cpp
   play_controller.h
+
+  res.qrc
 )
 
 target_link_libraries(qt_cpp_advanced_ui PRIVATE Qt5::Widgets)

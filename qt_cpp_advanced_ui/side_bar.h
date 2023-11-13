@@ -3,13 +3,14 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QString>
 #include <functional>
 
 using SideBarItemClickCallback = std::function<void()>;
 
 class SideBarItem : public QWidget {
 public:
-    SideBarItem(int nc, int ec, QWidget* parent = nullptr);
+    SideBarItem(int nc, int ec, const QString& title, QWidget* parent = nullptr);
     ~SideBarItem() = default;
 
     void paintEvent(QPaintEvent *event) override;
@@ -34,6 +35,8 @@ private:
     int left_right_padding_ = 8;
 
     bool selected_ = false;
+    QString title_ = "";
+
 };
 
 //// ---------------------------------------- ////

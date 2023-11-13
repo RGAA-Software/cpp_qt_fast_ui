@@ -51,9 +51,18 @@ MainWindow::MainWindow(QWidget *parent)
     // test
     {
         std::vector<std::shared_ptr<AudioItem>> items;
-        for (int i = 0; i < 20; i++) {
-            items.push_back(AudioItem::Make("", "海浪之声"));
-        }
+        items.push_back(AudioItem::Make(":/images/resources/preset_1.jpg", "海浪之声"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_2.jpg", "风和日丽"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_3.jpg", "山清水秀"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_4.jpg", "鸟语花香"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_5.jpg", "云淡风轻"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_6.jpg", "春暖花开"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_7.jpg", "江山如画"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_8.jpg", "雨过天晴"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_9.jpg", "风景如画"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_10.jpg", "白雪皑皑"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_11.jpg", "花团锦簇"));
+        items.push_back(AudioItem::Make(":/images/resources/preset_12.jpg", "林荫道长"));
         content_page_->UpdateAudioItems(items);
     }
 

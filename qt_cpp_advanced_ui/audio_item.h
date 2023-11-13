@@ -3,6 +3,8 @@
 
 #include <QRect>
 #include <QString>
+#include <QPixmap>
+#include <QBitmap>
 
 #include <memory>
 
@@ -17,8 +19,9 @@ public:
 public:
 
     QString name_;
-
     QRect draw_rect_;
+    QPixmap pixmap_;
+    QBitmap mask_;
 
 };
 

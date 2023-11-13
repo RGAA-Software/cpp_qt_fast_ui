@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QPixmap>
+#include <QImage>
 
 class Avatar : public QWidget
 {
@@ -14,6 +16,10 @@ public:
     void paintEvent(QPaintEvent *event) override;
 
 signals:
+
+private:
+
+    QPixmap pixmap_;
 
 };
 
