@@ -15,8 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
-    shadow->setColor(QColor(0x888888));
-    shadow->setBlurRadius(10);
+    shadow->setColor(QColor(0x666666));
+    shadow->setBlurRadius(12);
     this->setGraphicsEffect(shadow);
 
     title_bar_ = new TitleBar(this);

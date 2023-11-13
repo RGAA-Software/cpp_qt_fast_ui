@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QDebug>
 
 OperationIcon::OperationIcon(int radius, int normal_color, int enter_color, QWidget* parent) : QWidget(parent) {
     this->radius_ = radius;
@@ -110,4 +111,25 @@ void TitleBar::SetMinClickCallback(ClickCallback&& cbk) {
 
 void TitleBar::SetCloseClickCallback(ClickCallback&& cbk) {
     close_click_cbk_  = cbk;
+}
+
+void TitleBar::mousePressEvent(QMouseEvent *event) {
+    if (event->buttons() & Qt::LeftButton) {
+        click_point_ = event->globalPos();
+        click_window_pos_ = mapToGlobal(pos());
+        //qDebug() << "click point : " << event->pos();
+        left_pressed_ = true;
+    }
+}
+
+void TitleBar::mouseMoveEvent(QMouseEvent *event) {
+    if ((event->buttons() & Qt::LeftButton) && left_pressed_) {
+        QPoint point_offset = event->globalPos() - click_point_;
+        ((QWidget*)this->parent())->move(click_window_pos_ + point_offset);
+        //qDebug() << "move point : " << event->pos();
+    }
+}
+
+void TitleBar::mouseReleaseEvent(QMouseEvent *event) {
+    left_pressed_ = false;
 }

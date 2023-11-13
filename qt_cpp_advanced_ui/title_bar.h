@@ -44,10 +44,18 @@ public:
     void SetMinClickCallback(ClickCallback&& cbk);
     void SetCloseClickCallback(ClickCallback&& cbk);
 
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+
 private:
 
     ClickCallback min_click_cbk_;
     ClickCallback close_click_cbk_;
+
+    QPoint click_point_{};
+    QPoint click_window_pos_{};
+    bool left_pressed_ = false;
 
 };
 
