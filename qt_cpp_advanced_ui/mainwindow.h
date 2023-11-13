@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPaintEvent>
+#include <QScrollArea>
 
 class TitleBar;
 class SideBar;
@@ -26,6 +27,7 @@ private:
     TitleBar* title_bar_ = nullptr;
     SideBar* side_bar_ = nullptr;
     ContentPage* content_page_ = nullptr;
+    QScrollArea* content_area_ = nullptr;
 
 };
 #endif // MAINWINDOW_H

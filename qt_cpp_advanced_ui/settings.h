@@ -7,6 +7,8 @@ class Settings
 public:
     Settings();
 
+    static int kWindowWidth;
+    static int kWindowHeight;
     static int kTitleBarHeight;
     static int kOperationBtnRadius;
     static int kOperationBtnMinNomralColor;
@@ -17,6 +19,7 @@ public:
     static int kSideBarNormalColor;
     static int kSideBarEnterColor;
     static int kAvatarSize;
+
 };
 
 #endif // SETTINGS_H

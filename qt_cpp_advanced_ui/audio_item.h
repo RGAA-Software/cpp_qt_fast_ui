@@ -1,6 +1,7 @@
 #ifndef AUDIOITEM_H
 #define AUDIOITEM_H
 
+#include <QRect>
 #include <QString>
 
 #include <memory>
@@ -16,6 +17,8 @@ public:
 public:
 
     QString name_;
+
+    QRect draw_rect_;
 
 };
 

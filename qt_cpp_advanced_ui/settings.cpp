@@ -1,5 +1,7 @@
 #include "settings.h"
 
+int Settings::kWindowWidth = 960;
+int Settings::kWindowHeight = 540;
 int Settings::kTitleBarHeight = 30;
 int Settings::kOperationBtnRadius = 13;
 int Settings::kOperationBtnMinNomralColor = 0x888888;

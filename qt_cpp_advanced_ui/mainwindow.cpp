@@ -9,13 +9,15 @@
 #include "side_bar.h"
 #include "content_page.h"
 #include "audio_item.h"
+#include "settings.h"
+#include "layout_helper.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent) {
     setWindowFlags(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+    auto shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
     shadow->setColor(QColor(0x666666));
     shadow->setBlurRadius(12);
@@ -23,15 +25,30 @@ MainWindow::MainWindow(QWidget *parent)
 
     title_bar_ = new TitleBar(this);
     side_bar_ = new SideBar(this);
-    content_page_ = new ContentPage(4, 120, 20, this);
+
+    auto scroll_area_layout = new QVBoxLayout();
+    LayoutHelper::ClearMarginSpacing(scroll_area_layout);
+
+    content_area_ = new QScrollArea();
+    scroll_area_layout->addWidget(content_area_);
+    scroll_area_layout->addStretch();
+
+    content_area_->setFixedHeight(400);
+    content_area_->setStyleSheet("background-color:#ffffff; border:none;");
+    content_page_ = new ContentPage(4, 140, 40, this);
+    int real_content_width = Settings::kWindowWidth - Settings::kSideBarWidth - 5;
+    content_area_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    content_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    content_area_->setWidget(content_page_);
+
+    content_page_->setFixedWidth(real_content_width);
+    content_page_->SetMarginTop(40);
     // test
     {
         std::vector<std::shared_ptr<AudioItem>> items;
-        items.push_back(AudioItem::Make("",""));
-        items.push_back(AudioItem::Make("",""));
-        items.push_back(AudioItem::Make("",""));
-        items.push_back(AudioItem::Make("",""));
-        items.push_back(AudioItem::Make("",""));
+        for (int i = 0; i < 20; i++) {
+            items.push_back(AudioItem::Make("", "海浪之声"));
+        }
         content_page_->UpdateAudioItems(items);
     }
 
@@ -48,10 +65,10 @@ MainWindow::MainWindow(QWidget *parent)
     content_layout->setMargin(0);
     content_layout->addSpacing(5);
     content_layout->addWidget(side_bar_);
-    content_layout->addWidget(content_page_);
+    content_layout->addLayout(scroll_area_layout);
 
     root_layout->addLayout(content_layout);
-
+    content_layout->addSpacing(5);
     setLayout(root_layout);
 
     // title bar events
@@ -83,9 +100,6 @@ void MainWindow::paintEvent(QPaintEvent *ev) {
 void MainWindow::resizeEvent(QResizeEvent *event) {
     if (title_bar_) {
         title_bar_->setFixedWidth(event->size().width());
-    }
-    if (side_bar_) {
-
     }
 }
 
