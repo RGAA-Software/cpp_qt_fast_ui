@@ -32,6 +32,8 @@ add_executable(qt_cpp_advanced_ui
   audio_item.h
   play_controller.cpp
   play_controller.h
+  rotate_cover.cpp
+  rotate_cover.h
 
   res.qrc
 )

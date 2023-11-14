@@ -5,6 +5,8 @@
 #include <QPainter>
 #include <QPaintEvent>
 
+class RotateCover;
+
 class PlayController : public QWidget
 {
     Q_OBJECT
@@ -14,6 +16,10 @@ public:
     void paintEvent(QPaintEvent *event) override;
 
 signals:
+
+private:
+
+    RotateCover* rotate_cover_ = nullptr;
 
 };
 
