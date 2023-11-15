@@ -4,8 +4,12 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QLabel>
 
 class RotateCover;
+class Slider;
+class CircleButton;
+class VolumeController;
 
 class PlayController : public QWidget
 {
@@ -20,7 +24,12 @@ signals:
 private:
 
     RotateCover* rotate_cover_ = nullptr;
+    QLabel* title_ = nullptr;
+    Slider* slider_ = nullptr;
+    CircleButton* play_btn_ = nullptr;
+    VolumeController* volume_controller_ = nullptr;
 
+    bool is_playing_ = false;
 };
 
 #endif // PLAYCONTROLLER_H

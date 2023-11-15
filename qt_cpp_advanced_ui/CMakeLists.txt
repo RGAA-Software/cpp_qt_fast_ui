@@ -34,6 +34,12 @@ add_executable(qt_cpp_advanced_ui
   play_controller.h
   rotate_cover.cpp
   rotate_cover.h
+  slider.cpp
+  slider.h
+  circle_button.cpp
+  circle_button.h
+  volume_controller.cpp
+  volume_controller.h
 
   res.qrc
 )

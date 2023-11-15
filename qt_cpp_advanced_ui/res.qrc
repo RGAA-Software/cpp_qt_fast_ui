@@ -13,5 +13,9 @@
         <file>resources/preset_10.jpg</file>
         <file>resources/preset_11.jpg</file>
         <file>resources/preset_12.jpg</file>
+        <file>resources/play_arrow.svg</file>
+        <file>resources/play_arrow_active.svg</file>
+        <file>resources/pause.svg</file>
+        <file>resources/pause_active.svg</file>
     </qresource>
 </RCC>

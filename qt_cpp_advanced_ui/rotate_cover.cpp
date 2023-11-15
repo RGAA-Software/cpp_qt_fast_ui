@@ -9,7 +9,7 @@ RotateCover::RotateCover(int size, const QString& url, QWidget *parent) : QWidge
 
     rotate_timer_ = new QTimer(this);
     connect(rotate_timer_, &QTimer::timeout, this, [=]() {
-        rotate_angel_ += 0.2f;
+        rotate_angel_ += 0.8f;
         repaint();
     });
     rotate_timer_->start(17);
