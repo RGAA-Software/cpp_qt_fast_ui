@@ -50,8 +50,8 @@ public:
 
 private:
 
-    ClickCallback min_click_cbk_;
-    ClickCallback close_click_cbk_;
+    OperationIcon* min_btn_ = nullptr;
+    OperationIcon* close_btn_ = nullptr;
 
     QPoint click_point_{};
     QPoint click_window_pos_{};

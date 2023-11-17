@@ -66,25 +66,23 @@ TitleBar::TitleBar(QWidget* parent) : QWidget(parent) {
 
     // min
     {
-        auto min_btn = new OperationIcon(btn_size,
+        min_btn_ = new OperationIcon(btn_size,
                                          Settings::kOperationBtnMinNomralColor,
                                          Settings::kOperationBtnMinEnterColor,
                                          this);
-        min_btn->setFixedSize(QSize(btn_size, btn_size));
-        min_btn->SetOnClickCallback([=]() { min_click_cbk_(); });
-        item_layout->addWidget(min_btn);
+        min_btn_->setFixedSize(QSize(btn_size, btn_size));
+        item_layout->addWidget(min_btn_);
     }
     item_layout->addSpacing(6);
 
     // close
     {
-        auto close_btn = new OperationIcon(btn_size,
+        close_btn_ = new OperationIcon(btn_size,
                                            Settings::kOperationBtnCloseNomralColor,
                                            Settings::kOperationBtnCloseEnterColor,
                                            this);
-        close_btn->setFixedSize(QSize(btn_size, btn_size));
-        close_btn->SetOnClickCallback([=]() {close_click_cbk_();});
-        item_layout->addWidget(close_btn);
+        close_btn_->setFixedSize(QSize(btn_size, btn_size));
+        item_layout->addWidget(close_btn_);
     }
     item_layout->addSpacing(6);
 
@@ -106,11 +104,11 @@ void TitleBar::paintEvent(QPaintEvent *event) {
 }
 
 void TitleBar::SetMinClickCallback(ClickCallback&& cbk) {
-    min_click_cbk_ = cbk;
+    min_btn_->SetOnClickCallback(std::move(cbk));
 }
 
 void TitleBar::SetCloseClickCallback(ClickCallback&& cbk) {
-    close_click_cbk_  = cbk;
+    close_btn_->SetOnClickCallback(std::move(cbk));
 }
 
 void TitleBar::mousePressEvent(QMouseEvent *event) {
