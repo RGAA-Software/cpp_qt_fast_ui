@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     content_area_->setWidget(content_page_);
 
     content_page_->setFixedWidth(real_content_width);
-    content_page_->SetMarginTop(40);
+    content_page_->SetMarginTop(10);
     // test
     {
         std::vector<std::shared_ptr<AudioItem>> items;

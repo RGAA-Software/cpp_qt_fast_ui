@@ -45,8 +45,7 @@ void ContentPage::paintEvent(QPaintEvent *event) {
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
     painter.setBrush(QBrush(0xeeeeee));
     painter.setPen(Qt::NoPen);
-    QRect inner_rect(0, 0, this->rect().width()-padding_size_ , this->rect().height()-padding_size_);
-    //painter.drawRect(inner_rect);
+    painter.drawRect(this->rect());
 
     // 1. horizontal gap
     int h_gap = (this->width() - this->item_size_*this->item_count_) / (this->item_count_+1);
@@ -59,7 +58,8 @@ void ContentPage::paintEvent(QPaintEvent *event) {
         int draw_idx = audio_idx % this->item_count_;
         int line_idx = audio_idx / this->item_count_;
         QRect item_rect(draw_idx*this->item_size_ + h_gap*(draw_idx+1),
-                        (padding_top_ + this->item_size_)*line_idx + this->margin_top_,
+                        //(padding_top_ + this->item_size_)*line_idx + this->margin_top_,
+                        (this->item_size_)*line_idx + padding_top_*(line_idx+1),
                         item_size_, item_size_);
         item->draw_rect_ = item_rect;
         painter.setPen(Qt::NoPen);
@@ -71,12 +71,12 @@ void ContentPage::paintEvent(QPaintEvent *event) {
 
         int circle_diameter = item_rect.width()* 0.7;
         int left_padding = (item_rect.width() - circle_diameter)/2;
-        QRect circle_rect(item_rect.x() + left_padding,
-                          item_rect.y() + 7,
-                          circle_diameter,
-                          circle_diameter);
-        painter.setBrush(QBrush(0xffffff));
-        painter.drawEllipse(circle_rect);
+//        QRect circle_rect(item_rect.x() + left_padding,
+//                          item_rect.y() + 7,
+//                          circle_diameter,
+//                          circle_diameter);
+//        painter.setBrush(QBrush(0xffffff));
+//        painter.drawEllipse(circle_rect);
 
         painter.save();
         QPainterPath path;
