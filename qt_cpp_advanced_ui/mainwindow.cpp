@@ -12,6 +12,7 @@
 #include "settings.h"
 #include "layout_helper.h"
 #include "play_controller.h"
+#include "mediaplayer.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent) {
@@ -93,6 +94,10 @@ MainWindow::MainWindow(QWidget *parent)
     title_bar_->SetCloseClickCallback([=]() {
         qApp->exit(0);
     });
+
+    media_player_ = std::make_shared<MediaPlayer>("A_Little_Story.mp3");
+    media_player_->SetVolume(50);
+    media_player_->Play();
 }
 
 MainWindow::~MainWindow() {

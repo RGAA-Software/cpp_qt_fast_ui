@@ -9,6 +9,7 @@ class TitleBar;
 class SideBar;
 class ContentPage;
 class PlayController;
+class MediaPlayer;
 
 class MainWindow : public QWidget
 {
@@ -31,5 +32,6 @@ private:
     QScrollArea* content_area_ = nullptr;
     PlayController* play_controller_ = nullptr;
 
+    std::shared_ptr<MediaPlayer> media_player_ = nullptr;
 };
 #endif // MAINWINDOW_H
