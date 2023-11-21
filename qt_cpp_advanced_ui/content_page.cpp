@@ -45,7 +45,7 @@ void ContentPage::paintEvent(QPaintEvent *event) {
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
     painter.setBrush(QBrush(0xeeeeee));
     painter.setPen(Qt::NoPen);
-    painter.drawRect(this->rect());
+    //painter.drawRect(this->rect());
 
     // 1. horizontal gap
     int h_gap = (this->width() - this->item_size_*this->item_count_) / (this->item_count_+1);
