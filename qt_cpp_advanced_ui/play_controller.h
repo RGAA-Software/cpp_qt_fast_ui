@@ -19,6 +19,11 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
+    void UpdatePlayingPosition(float percent);
+    void SetVolume(int volume);
+    void SetTitle(const QString& title);
+    void ChangeIcon(const QPixmap& pixmap);
+
 signals:
 
 private:

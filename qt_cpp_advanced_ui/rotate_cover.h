@@ -15,6 +15,8 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
+    void ChangeIcon(const QPixmap& pixmap);
+
 signals:
 
 private:

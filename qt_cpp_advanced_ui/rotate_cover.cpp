@@ -2,6 +2,7 @@
 
 RotateCover::RotateCover(int size, const QString& url, QWidget *parent) : QWidget(parent) {
     setFixedSize(QSize(size, size));
+
     QImage image;
     image.load(url);
     pixmap_ = QPixmap::fromImage(image);
@@ -48,4 +49,8 @@ void RotateCover::paintEvent(QPaintEvent *event) {
     painter.setBrush(QBrush(QColor(0xffffff)));
     painter.drawEllipse(QPointF(this->width()/2, this->height()/2), inner_circle_width, inner_circle_width);
 
+}
+
+void RotateCover::ChangeIcon(const QPixmap& pixmap) {
+    pixmap_ = pixmap;
 }

@@ -17,31 +17,34 @@ MediaPlayer::MediaPlayer(const QString& name) {
     player_ = std::make_shared<VLC::MediaPlayer>(*media_.get());
 
     player_->eventManager().onOpening([=]() {
-
+        qDebug() << "onOpening";
     });
 
     player_->eventManager().onPlaying([=]() {
-
+        qDebug() << "onPlaying";
     });
 
-    player_->eventManager().onPositionChanged([](float pos) {
-
+    player_->eventManager().onPositionChanged([this](float pos) {
+        //qDebug() << "onPositionChanged: " << pos;
+        if (on_position_changed_cbk_) {
+            on_position_changed_cbk_(pos);
+        }
     });
 
     player_->eventManager().onTimeChanged([=](float t) {
-
+        //qDebug() << "onTimeChanged: " << t;
     });
 
     player_->eventManager().onPaused([=]() {
-
+        qDebug() << "onPaused ";
     });
 
     player_->eventManager().onStopped([=]() {
-
+        qDebug() << "onStopped";
     });
 
     player_->eventManager().onEndReached([=]() {
-
+        qDebug() << "onEndReached";
     });
 }
 
@@ -72,4 +75,8 @@ void MediaPlayer::SetVolume(int volume) {
 
 void MediaPlayer::SeekPosition(float percent) {
     player_->setPosition(percent);
+}
+
+void MediaPlayer::SetOnPositionChangedCallback(std::function<void (float)> &&cbk) {
+    on_position_changed_cbk_ = std::move(cbk);
 }

@@ -36,8 +36,17 @@ void ContentPage::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void ContentPage::mouseReleaseEvent(QMouseEvent *event) {
-
     repaint();
+}
+
+void ContentPage::mouseDoubleClickEvent(QMouseEvent *event) {
+    if (double_click_cbk_) {
+        double_click_cbk_(current_item_);
+    }
+}
+
+void ContentPage::SetOnItemDoubleClickCallback(OnItemDoubleClickedCallback&& cbk) {
+    double_click_cbk_ = std::move(cbk);
 }
 
 void ContentPage::paintEvent(QPaintEvent *event) {

@@ -96,3 +96,19 @@ void PlayController::paintEvent(QPaintEvent *event) {
     painter.setBrush(QBrush(0xccddee));
     //painter.drawRect(this->rect());
 }
+
+void PlayController::UpdatePlayingPosition(float percent) {
+    slider_->SetCurrentProgress(percent * 100);
+}
+
+void PlayController::SetVolume(int volume) {
+    volume_controller_->SetCurrentVolume(volume);
+}
+
+void PlayController::SetTitle(const QString& title) {
+    title_->setText(title);
+}
+
+void PlayController::ChangeIcon(const QPixmap& pixmap) {
+    rotate_cover_->ChangeIcon(pixmap);
+}

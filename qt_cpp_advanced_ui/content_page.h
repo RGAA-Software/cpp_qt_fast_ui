@@ -4,8 +4,11 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPaintEvent>
+#include <functional>
 
 class AudioItem;
+
+using OnItemDoubleClickedCallback = std::function<void(const std::shared_ptr<AudioItem>&)>;
 
 class ContentPage : public QWidget
 {
@@ -22,6 +25,8 @@ public:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
 
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void SetOnItemDoubleClickCallback(OnItemDoubleClickedCallback&& cbk);
 
 private:
 
@@ -34,6 +39,8 @@ private:
     std::shared_ptr<AudioItem> current_item_ = nullptr;
 
     std::vector<std::shared_ptr<AudioItem>> audio_items_;
+
+    OnItemDoubleClickedCallback double_click_cbk_;
 
 };
 
