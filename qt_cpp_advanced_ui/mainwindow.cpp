@@ -96,10 +96,6 @@ MainWindow::MainWindow(QWidget *parent)
         qApp->exit(0);
     });
 
-    media_player_ = std::make_shared<MediaPlayer>("A_Little_Story.mp3");
-    media_player_->SetVolume(50);
-    media_player_->Play();
-
     content_page_->SetOnItemDoubleClickCallback([=](const std::shared_ptr<AudioItem>& item) {
         qDebug() << "double clicked item: " << item->name_;
 
