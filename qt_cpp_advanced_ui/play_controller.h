@@ -10,6 +10,7 @@ class RotateCover;
 class Slider;
 class CircleButton;
 class VolumeController;
+class MediaPlayer;
 
 class PlayController : public QWidget
 {
@@ -24,7 +25,7 @@ public:
     void SetTitle(const QString& title);
     void ChangeIcon(const QPixmap& pixmap);
 
-signals:
+    void SetMediaPlayer(const std::shared_ptr<MediaPlayer>& player);
 
 private:
 
@@ -35,6 +36,8 @@ private:
     VolumeController* volume_controller_ = nullptr;
 
     bool is_playing_ = false;
+
+    std::weak_ptr<MediaPlayer> media_player_;
 };
 
 #endif // PLAYCONTROLLER_H

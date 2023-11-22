@@ -54,16 +54,31 @@ void Slider::mouseMoveEvent(QMouseEvent *event) {
     if (mouse_pressed_) {
         circle_handle_x_offset_ = event->pos().x();
         repaint();
+
+        if (progress_cbk_) {
+            float percent = circle_handle_x_offset_ * 1.0f / this->width();
+            progress_cbk_(percent);
+        }
     }
 }
 
 void Slider::mouseReleaseEvent(QMouseEvent *event) {
     mouse_pressed_ = false;
+    circle_handle_x_offset_ = event->pos().x();
     repaint();
+
+    if (progress_cbk_) {
+        float percent = circle_handle_x_offset_ * 1.0f / this->width();
+        progress_cbk_(percent);
+    }
 }
 
 void Slider::SetCurrentProgress(int percent) {
     percent = std::min(100, percent);
     circle_handle_x_offset_ = percent * 1.0f / 100.0f * this->width();
     repaint();
+}
+
+void Slider::SetProgressCallback(std::function<void(float)>&& cbk) {
+    progress_cbk_ = cbk;
 }

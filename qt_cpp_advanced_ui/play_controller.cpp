@@ -4,6 +4,7 @@
 #include "slider.h"
 #include "circle_button.h"
 #include "volume_controller.h"
+#include "mediaplayer.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -37,6 +38,12 @@ PlayController::PlayController(QWidget *parent) : QWidget(parent) {
         slider_->setFixedHeight(30);
         slider_->setMinimumWidth(450);
         slider_->SetCurrentProgress(50);
+        slider_->SetProgressCallback([=](float percent) {
+            auto mp = this->media_player_.lock();
+            if (mp) {
+                mp->SeekPosition(percent);
+            }
+        });
         item_layout->addSpacing(10);
         item_layout->addWidget(slider_);
 
@@ -56,10 +63,18 @@ PlayController::PlayController(QWidget *parent) : QWidget(parent) {
             if (is_playing_) {
                 is_playing_ = false;
                 play_btn_->ChangeIcon(":/images/resources/play_arrow.svg", ":/images/resources/play_arrow_active.svg");
+                auto mp = this->media_player_.lock();
+                if (mp) {
+                    mp->Pause();
+                }
             }
             else {
                 is_playing_ = true;
                 play_btn_->ChangeIcon(":/images/resources/pause.svg", ":/images/resources/pause_active.svg");
+                auto mp = this->media_player_.lock();
+                if (mp) {
+                    mp->Resume();
+                }
             }
         });
 
@@ -77,6 +92,12 @@ PlayController::PlayController(QWidget *parent) : QWidget(parent) {
 
         volume_controller_ = new VolumeController(this);
         volume_controller_->setFixedSize(QSize(100, 25));
+        volume_controller_->SetVolumeCallback([this](int percent) {
+            auto mp = this->media_player_.lock();
+            if (mp) {
+                mp->SetVolume(percent);
+            }
+        });
         item_layout->addSpacing(32);
         item_layout->addWidget(volume_controller_);
         item_layout->addStretch();
@@ -112,3 +133,8 @@ void PlayController::SetTitle(const QString& title) {
 void PlayController::ChangeIcon(const QPixmap& pixmap) {
     rotate_cover_->ChangeIcon(pixmap);
 }
+
+void PlayController::SetMediaPlayer(const std::shared_ptr<MediaPlayer>& player) {
+    media_player_ = player;
+}
+

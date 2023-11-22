@@ -116,6 +116,8 @@ MainWindow::MainWindow(QWidget *parent)
             });
         });
         media_player_->Play();
+
+        play_controller_->SetMediaPlayer(media_player_);
     });
 }
 

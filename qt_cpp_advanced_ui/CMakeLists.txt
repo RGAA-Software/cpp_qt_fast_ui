@@ -16,8 +16,9 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 include_directories(${CMAKE_SOURCE_DIR}/libvlcpp)
 
 set(VLC_ROOT D:/software/vlc-3.0.20-win64/vlc-3.0.20)
-set(QT_ROOT C:/Qt/Qt5.14.2/5.14.2/mingw73_64)
 include_directories(${VLC_ROOT}/sdk/include)
+
+set(QT_ROOT C:/Qt/Qt5.14.2/5.14.2/mingw73_64)
 
 add_executable(qt_cpp_advanced_ui
   main.cpp

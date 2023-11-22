@@ -48,9 +48,24 @@ void VolumeController::mouseReleaseEvent(QMouseEvent *event) {
     int percent = event->pos().x() * 1.0f / this->width() * 100;
     SetCurrentVolume(percent);
     repaint();
+
+    if (this->volume_cbk_) {
+        this->volume_cbk_(percent);
+    }
 }
 
 void VolumeController::SetCurrentVolume(int volume) {
     this->current_volume_ = volume;
     repaint();
 }
+
+void VolumeController::SetVolumeCallback(std::function<void(int)>&& cbk) {
+    this->volume_cbk_ = std::move(cbk);
+}
+
+
+
+
+
+
+

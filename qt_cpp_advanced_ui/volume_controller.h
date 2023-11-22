@@ -18,9 +18,13 @@ public:
 
     void SetCurrentVolume(int volume);
 
+    void SetVolumeCallback(std::function<void(int)>&& cbk);
+
 private:
 
     int current_volume_ = 30;
+
+    std::function<void(int)> volume_cbk_;
 
 };
 

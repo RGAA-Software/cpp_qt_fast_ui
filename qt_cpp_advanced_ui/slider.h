@@ -20,6 +20,8 @@ public:
 
     void SetCurrentProgress(int percent);
 
+    void SetProgressCallback(std::function<void(float)>&& cbk);
+
 private:
 
     int normal_color_;
@@ -29,6 +31,8 @@ private:
     bool mouse_pressed_ = false;
 
     int circle_handle_x_offset_ = 0;
+
+    std::function<void(float)> progress_cbk_;
 
 };
 
