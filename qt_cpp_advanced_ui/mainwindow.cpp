@@ -118,6 +118,7 @@ MainWindow::MainWindow(QWidget *parent)
         media_player_->Play();
 
         play_controller_->SetMediaPlayer(media_player_);
+        play_controller_->ChangePlayButtonState(true);
     });
 }
 

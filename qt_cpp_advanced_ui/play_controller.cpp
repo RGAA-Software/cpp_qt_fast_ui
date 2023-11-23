@@ -60,22 +60,7 @@ PlayController::PlayController(QWidget *parent) : QWidget(parent) {
         play_btn_ = new CircleButton(":/images/resources/play_arrow.svg", ":/images/resources/play_arrow_active.svg");
         play_btn_->setFixedSize(QSize(30, 30));
         play_btn_->SetOnClickCallback([=]() {
-            if (is_playing_) {
-                is_playing_ = false;
-                play_btn_->ChangeIcon(":/images/resources/play_arrow.svg", ":/images/resources/play_arrow_active.svg");
-                auto mp = this->media_player_.lock();
-                if (mp) {
-                    mp->Pause();
-                }
-            }
-            else {
-                is_playing_ = true;
-                play_btn_->ChangeIcon(":/images/resources/pause.svg", ":/images/resources/pause_active.svg");
-                auto mp = this->media_player_.lock();
-                if (mp) {
-                    mp->Resume();
-                }
-            }
+            this->ChangePlayButtonState(!is_playing_);
         });
 
         item_layout->addStretch();
@@ -109,6 +94,24 @@ PlayController::PlayController(QWidget *parent) : QWidget(parent) {
     root_layout->addStretch();
 
     setLayout(root_layout);
+}
+
+void PlayController::ChangePlayButtonState(bool playing) {
+    is_playing_ = playing;
+    if (playing) {
+        play_btn_->ChangeIcon(":/images/resources/pause.svg", ":/images/resources/pause_active.svg");
+        auto mp = this->media_player_.lock();
+        if (mp) {
+            mp->Resume();
+        }
+    }
+    else {
+        play_btn_->ChangeIcon(":/images/resources/play_arrow.svg", ":/images/resources/play_arrow_active.svg");
+        auto mp = this->media_player_.lock();
+        if (mp) {
+            mp->Pause();
+        }
+    }
 }
 
 void PlayController::paintEvent(QPaintEvent *event) {

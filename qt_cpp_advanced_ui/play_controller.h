@@ -26,6 +26,7 @@ public:
     void ChangeIcon(const QPixmap& pixmap);
 
     void SetMediaPlayer(const std::shared_ptr<MediaPlayer>& player);
+    void ChangePlayButtonState(bool playing);
 
 private:
 
